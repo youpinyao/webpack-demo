@@ -1,0 +1,16 @@
+
+body {
+  background-color: #333333;
+}
+
+.main {
+  width: 200px;
+  height: 100px;
+  background: url(../images/img/666.png);
+  margin-bottom: 20px;
+}
+.second {
+  width: 200px;
+  height: 100px;
+  background: url(../images/666.png);
+}
