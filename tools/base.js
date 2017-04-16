@@ -28,6 +28,10 @@ module.exports = function () {
     module: modules,
     plugins: [
 
+      new webpack.ProvidePlugin({
+        _: 'underscore'
+      }),
+
       new webpack.NoEmitOnErrorsPlugin(),
       new webpack.HotModuleReplacementPlugin(),
       new webpack.HashedModuleIdsPlugin(),

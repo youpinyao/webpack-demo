@@ -7,8 +7,10 @@ module.exports = {
     use: [{
       loader: 'html-loader',
       options: {
+        interpolate: true,
         ignoreCustomFragments: [/\{\{.*?}}/],
-        attrs: ['img:src', 'link:href']
+        attrs: ['img:src', 'link:href'],
+        minimize: false
       }
     }]
   }, {
@@ -55,3 +57,13 @@ module.exports = {
     exclude: [/\.(spec|e2e)\.ts$/, /(node_modules)/]
   }]
 };
+
+// {
+//   test: /\.ejs$/,
+//   loader: 'ejs-loader',
+//   query: {
+//     variable: 'data',
+//     interpolate: '\\{\\{(.+?)\\}\\}',
+//     evaluate: '\\[\\[(.+?)\\]\\]'
+//   }
+// }

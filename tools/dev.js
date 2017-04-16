@@ -1,8 +1,16 @@
 const webpackMerge = require('webpack-merge');
 const webpack = require('webpack');
 const path = require('path');
+const fs = require('fs');
 const HtmlWebpackIncludeAssetsPlugin = require('html-webpack-include-assets-plugin');
 const commonConfig = require('./base.js');
+
+const dllCssPath = './.dll/vendor.dll.css';
+const assets = ['./.dll/vendor.dll.js'];
+
+if (fs.existsSync(dllCssPath)) {
+  assets.push(dllCssPath);
+}
 
 module.exports = function () {
   return webpackMerge(commonConfig(), {
@@ -22,7 +30,7 @@ module.exports = function () {
       publicPath: commonConfig().output.publicPath.split('..')[1],
       compress: true, // Enable gzip compression for everything served:
       watchContentBase: true,
-      contentBase: [path.join(__dirname, '../views')],
+      // contentBase: [path.join(__dirname, '../views'), path.join(__dirname, '../.dll')],
     },
     plugins: [
       // 压缩 js
@@ -31,7 +39,7 @@ module.exports = function () {
       }),
 
       new HtmlWebpackIncludeAssetsPlugin({
-        assets: ['./.dll/vendor.dll.js', './.dll/vendor.dll.css'],
+        assets,
         append: false,
         hash: true,
       }),
