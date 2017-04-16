@@ -1,2 +1,3 @@
 dist/
+.dll/
 node_modules/

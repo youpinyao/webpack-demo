@@ -1,13 +1,22 @@
-const webpackMerge = require('webpack-merge');
 const webpack = require('webpack');
+const webpackMerge = require('webpack-merge');
+
 const commonConfig = require('./base.js');
 
 module.exports = function () {
   return webpackMerge(commonConfig(), {
     plugins: [
       new webpack.LoaderOptionsPlugin({
-        minimize: true,
+        minimize: false,
         debug: false
+      }),
+      // 输出公共模块
+      new webpack.optimize.CommonsChunkPlugin({
+        name: ['vendor'],
+        minChunks(module) {
+          // this assumes your vendor imports exist in the node_modules directory
+          return module.context && module.context.indexOf('node_modules') !== -1;
+        }
       }),
       new webpack.DefinePlugin({
         'process.env': {
