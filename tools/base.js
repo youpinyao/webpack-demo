@@ -3,53 +3,52 @@ const webpack = require('webpack');
 // const ChunkManifestPlugin = require('chunk-manifest-webpack-plugin');
 const WebpackChunkHash = require('webpack-chunk-hash');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+// const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 
-
 const modules = require('./modules.js');
+const config = require('./config.js');
+const util = require('./util.js');
 
-module.exports = function () {
+const pluginHtmls = util.htmls();
+
+function getPlugins(isDev) {
+  let plugins = [
+    new webpack.ProvidePlugin({
+      _: 'underscore'
+    }),
+    new webpack.optimize.OccurrenceOrderPlugin(),
+    new webpack.NoEmitOnErrorsPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.HashedModuleIdsPlugin(),
+    new WebpackChunkHash(),
+    new ProgressBarPlugin(),
+    new webpack.NamedModulesPlugin(),
+
+    // 输出 css
+    new ExtractTextPlugin('css/[name].[hash].css'),
+  ];
+
+  plugins = plugins.concat(pluginHtmls);
+
+  return plugins;
+}
+
+module.exports = function (isDev) {
 
   return {
-    entry: {
-      index: './js/index.js',
-    },
+    entry: util.entrys(isDev),
     output: {
       filename: 'js/[name].[hash].js',
-      publicPath: '../',
-      path: path.resolve(__dirname, '../dist/'),
+      publicPath: config.publicPath,
+      path: path.resolve(__dirname, config.path),
       sourceMapFilename: '[name].[hash].map'
     },
     resolve: {
       extensions: ['.ts', '.js', '.json'],
-      modules: [path.join(__dirname, 'js/lib'), 'node_modules']
+      modules: ['node_modules']
     },
     module: modules,
-    plugins: [
-
-      new webpack.ProvidePlugin({
-        _: 'underscore'
-      }),
-
-      new webpack.NoEmitOnErrorsPlugin(),
-      new webpack.HotModuleReplacementPlugin(),
-      new webpack.HashedModuleIdsPlugin(),
-      new WebpackChunkHash(),
-      new ProgressBarPlugin(),
-
-      // 输出 css
-      new ExtractTextPlugin('css/[name].[hash].css'),
-
-      // HTML 注入
-      new HtmlWebpackPlugin({
-        title: '首页',
-        minify: false,
-        filename: 'views/index.html',
-        template: 'views/index.html',
-        chunks: ['index', 'vendor'],
-        inject: 'body', // true | 'head' | 'body' | false
-      })
-    ]
+    plugins: getPlugins(isDev),
   };
 };

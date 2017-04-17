@@ -11,6 +11,11 @@
       "impliedStrict": true
     }
   },
+  "globals": {
+    "$": true,
+    "window": true,
+    "document": true
+  },
   "rules": {
     "quotes": ["error", "single", {
       "avoidEscape": true,
@@ -25,11 +30,17 @@
     "indent": ["error", 2],
     "comma-dangle": ["error", "only-multiline"],
     "object-shorthand": ["error", "always"],
-    "no-console": 1,
-    "no-debugger": 1,
+    "no-use-before-define": ["error", { "functions": false, "classes": true }],
+    "no-console": 0,
+    "no-debugger": 0,
     "no-alert": 1,
     "import/no-unresolved": 0,
     "import/no-extraneous-dependencies": 0,
-    "lines-around-comment": 0
+    "lines-around-comment": 0,
+    "no-unused-vars": 2,
+    "import/no-dynamic-require": 0,
+    "require-jsdoc": 0,
+    "no-invalid-this": 0,
+    "no-unused-vars": 0
   }
 }

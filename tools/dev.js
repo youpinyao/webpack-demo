@@ -1,8 +1,11 @@
+process.traceDeprecation = true;
+
 const webpackMerge = require('webpack-merge');
 const webpack = require('webpack');
 const path = require('path');
 const fs = require('fs');
 const HtmlWebpackIncludeAssetsPlugin = require('html-webpack-include-assets-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const commonConfig = require('./base.js');
 
 const dllCssPath = './.dll/vendor.dll.css';
@@ -13,15 +16,16 @@ if (fs.existsSync(dllCssPath)) {
 }
 
 module.exports = function () {
-  return webpackMerge(commonConfig(), {
+  return webpackMerge(commonConfig(true), {
     cache: true,
     devtool: 'inline-source-map',
     devServer: {
-      port: 7777,
+      port: 8686,
       host: 'localhost',
       hot: true,
       noInfo: false,
-      stats: 'minimal',
+      quiet: true,
+      stats: 'errors-only',
       inline: true,
       https: false,
       watchOptions: {
@@ -29,15 +33,10 @@ module.exports = function () {
       },
       publicPath: commonConfig().output.publicPath.split('..')[1],
       compress: true, // Enable gzip compression for everything served:
-      watchContentBase: true,
+      watchContentBase: false,
       // contentBase: [path.join(__dirname, '../views'), path.join(__dirname, '../.dll')],
     },
     plugins: [
-      // 压缩 js
-      new webpack.optimize.UglifyJsPlugin({
-        sourceMap: true
-      }),
-
       new HtmlWebpackIncludeAssetsPlugin({
         assets,
         append: false,
@@ -53,10 +52,11 @@ module.exports = function () {
         'process.env': {
           NODE_ENV: JSON.stringify('development')
         }
-      })
-      // new ExtractTextPlugin({
-      //   disable: true
-      // })
+      }),
+
+      new ExtractTextPlugin({
+        disable: true
+      }),
     ]
   });
 };

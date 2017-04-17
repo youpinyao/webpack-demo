@@ -21,6 +21,11 @@ module.exports = {
       use: ['css-loader', 'autoprefixer-loader', 'resolve-url-loader', 'sass-loader']
     })
   }, {
+    test: /\.js?$/,
+    enforce: 'pre',
+    loader: 'eslint-loader',
+    exclude: /node_modules/
+  }, {
     test: /\.js$/,
     exclude: /(node_modules)/,
     use: [{
@@ -39,7 +44,7 @@ module.exports = {
       }
     }]
   }, {
-    test: /\.(jpg|png|gif|woff|woff2|eot|ttf|svg)$/,
+    test: /\.(jpg|png|gif|woff|woff2|eot|ttf|svg|ico)$/,
     exclude: /(node_modules)/,
     use: [{
       loader: 'url-loader',

@@ -1,10 +1,13 @@
 const webpack = require('webpack');
 const webpackMerge = require('webpack-merge');
-
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const commonConfig = require('./base.js');
 
 module.exports = function () {
   return webpackMerge(commonConfig(), {
+    entry: {
+      vendor: './js/vendor.js'
+    },
     plugins: [
       new webpack.LoaderOptionsPlugin({
         minimize: false,
@@ -23,16 +26,30 @@ module.exports = function () {
           NODE_ENV: JSON.stringify('production')
         }
       }),
+
+      new OptimizeCssAssetsPlugin({
+        assetNameRegExp: /\.css$/g,
+        cssProcessor: require('cssnano'),
+        cssProcessorOptions: {
+          discardComments: {
+            removeAll: true
+          }
+        },
+        canPrint: true
+      }),
+
       new webpack.optimize.UglifyJsPlugin({
+        sourceMap: false,
         beautify: false,
+        comments: false,
         mangle: {
           screw_ie8: true,
           keep_fnames: true
         },
         compress: {
-          screw_ie8: true
-        },
-        comments: false
+          screw_ie8: true,
+          warnings: false
+        }
       })
     ]
   });
