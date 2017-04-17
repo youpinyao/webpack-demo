@@ -14,11 +14,33 @@ module.exports = {
       }
     }]
   }, {
-    test: /\.(css|sass)$/,
+    test: /\.(css|scss)$/,
     exclude: /(node_modules)/,
     use: ExtractTextPlugin.extract({
       fallback: 'style-loader',
-      use: ['css-loader', 'autoprefixer-loader', 'resolve-url-loader', 'sass-loader']
+      use: [{
+        loader: 'css-loader',
+        options: {
+          minimize: true
+        }
+      }, {
+        loader: 'postcss-loader',
+        options: {
+          ident: 'postcss', // https://webpack.js.org/guides/migrating/#complex-options
+          plugins() {
+            return [
+              require('autoprefixer')({
+                browsers: [
+                  '>1%',
+                  'last 4 versions',
+                  'Firefox ESR',
+                  'not ie < 8', // doesn't support IE8 anyway
+                ]
+              })
+            ];
+          }
+        }
+      }, 'sass-loader', 'resolve-url-loader']
     })
   }, {
     test: /\.js?$/,
@@ -62,13 +84,3 @@ module.exports = {
     exclude: [/\.(spec|e2e)\.ts$/, /(node_modules)/]
   }]
 };
-
-// {
-//   test: /\.ejs$/,
-//   loader: 'ejs-loader',
-//   query: {
-//     variable: 'data',
-//     interpolate: '\\{\\{(.+?)\\}\\}',
-//     evaluate: '\\[\\[(.+?)\\]\\]'
-//   }
-// }

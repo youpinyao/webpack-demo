@@ -1,6 +1,5 @@
 const webpack = require('webpack');
 const webpackMerge = require('webpack-merge');
-const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const commonConfig = require('./base.js');
 
 module.exports = function () {
@@ -13,6 +12,7 @@ module.exports = function () {
         minimize: false,
         debug: false
       }),
+
       // 输出公共模块
       new webpack.optimize.CommonsChunkPlugin({
         name: ['vendor'],
@@ -21,21 +21,11 @@ module.exports = function () {
           return module.context && module.context.indexOf('node_modules') !== -1;
         }
       }),
+
       new webpack.DefinePlugin({
         'process.env': {
           NODE_ENV: JSON.stringify('production')
         }
-      }),
-
-      new OptimizeCssAssetsPlugin({
-        assetNameRegExp: /\.css$/g,
-        cssProcessor: require('cssnano'),
-        cssProcessorOptions: {
-          discardComments: {
-            removeAll: true
-          }
-        },
-        canPrint: true
       }),
 
       new webpack.optimize.UglifyJsPlugin({
@@ -43,11 +33,11 @@ module.exports = function () {
         beautify: false,
         comments: false,
         mangle: {
-          screw_ie8: true,
-          keep_fnames: true
+          screw_ie8: false,
+          keep_fnames: false
         },
         compress: {
-          screw_ie8: true,
+          screw_ie8: false,
           warnings: false
         }
       })
