@@ -37,6 +37,6 @@ module.exports = {
      */
     library: '[name]_library'
   },
-  module: modules,
+  module: modules(),
   plugins,
 };

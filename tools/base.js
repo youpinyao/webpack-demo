@@ -48,7 +48,7 @@ module.exports = function (isDev) {
       extensions: ['.ts', '.js', '.json'],
       modules: ['node_modules']
     },
-    module: modules,
+    module: modules(isDev),
     plugins: getPlugins(isDev),
   };
 };

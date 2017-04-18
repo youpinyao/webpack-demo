@@ -39,6 +39,9 @@ module.exports = function () {
         compress: {
           screw_ie8: false,
           warnings: false
+        },
+        output: {
+          screw_ie8: false
         }
       })
     ]

@@ -25,6 +25,10 @@ module.exports = function () {
       hot: true,
       noInfo: true,
       quiet: false,
+      overlay: {
+        warnings: true,
+        errors: true
+      },
       stats: 'errors-only',
       inline: true,
       https: false,
