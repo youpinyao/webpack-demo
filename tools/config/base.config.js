@@ -6,9 +6,9 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 // const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 
-const modules = require('./modules.js');
-const config = require('./config.js');
-const util = require('./util.js');
+const modules = require('../util/modules.js');
+const util = require('../util/util.js');
+const config = require('../config/config.js');
 
 const pluginHtmls = util.htmls();
 

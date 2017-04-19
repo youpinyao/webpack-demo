@@ -1,3 +1,4 @@
 dist/
 .dll/
+tools/
 node_modules/

@@ -44,11 +44,6 @@ module.exports = function (isDev) {
         }, 'sass-loader', 'resolve-url-loader']
       })
     }, {
-      test: /\.js?$/,
-      enforce: 'pre',
-      loader: 'eslint-loader',
-      exclude: /node_modules/
-    }, {
       test: /\.js$/,
       exclude: /(node_modules)/,
       use: [{
@@ -67,7 +62,12 @@ module.exports = function (isDev) {
         }
       }]
     }, {
-      test: /\.(jpg|png|gif|woff|woff2|eot|ttf|svg|ico)$/,
+      test: /\.js?$/,
+      enforce: 'pre',
+      loader: 'eslint-loader',
+      exclude: /(node_modules|tools)/
+    }, {
+      test: /\.(jpg|png|gif|woff|woff2|eot|ttf|svg|ico|mp3|mp4)$/,
       exclude: /(node_modules)/,
       use: [{
         loader: 'url-loader',

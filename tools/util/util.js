@@ -1,9 +1,24 @@
-const entrys = require('./config.js').entrys;
+const entrys = require('../config.js').entrys;
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const del = require('delete');
+const path = require('path');
+const config = require('../config/config.js');
 
 module.exports = {
-  getName(path) {
-    let name = path.split('/');
+  delDll() {
+    del.sync(['.dll'], {
+      force: true
+    });
+    console.log('\r\ndelete .dll complete\r\n');
+  },
+  delDist() {
+    del.sync(['dist'], {
+      force: true
+    });
+    console.log('\r\ndelete dist complete\r\n');
+  },
+  getName(p) {
+    let name = p.split('/');
 
     name = name[name.length - 1].split('.')[0];
 
@@ -41,7 +56,9 @@ module.exports = {
 
       if (isDev) {
         entry[jsName] = entry[jsName].concat([
-          'webpack/hot/only-dev-server'
+          'webpack/hot/dev-server',
+          `webpack-dev-server/client?http://${config.host}:${config.port}/`,
+
         ]);
       }
 

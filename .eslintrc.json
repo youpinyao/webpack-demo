@@ -33,7 +33,7 @@
     "no-use-before-define": ["error", { "functions": false, "classes": true }],
     "no-console": 0,
     "no-debugger": 0,
-    "no-alert": 1,
+    "no-alert": 0,
     "import/no-unresolved": 0,
     "import/no-extraneous-dependencies": 0,
     "lines-around-comment": 0,
@@ -41,6 +41,7 @@
     "import/no-dynamic-require": 0,
     "require-jsdoc": 0,
     "no-invalid-this": 0,
-    "no-unused-vars": 0
+    "no-unused-vars": 0,
+    "prefer-arrow-callback": 0
   }
 }
