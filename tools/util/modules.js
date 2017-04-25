@@ -10,7 +10,7 @@ module.exports = function (isDev) {
         options: {
           interpolate: true,
           ignoreCustomFragments: [/\{\{.*?}}/],
-          attrs: ['img:src', 'link:href'],
+          attrs: ['img:src', 'link:href', 'audio:src', 'video:src', 'script:src'],
           minimize: false
         }
       }]
