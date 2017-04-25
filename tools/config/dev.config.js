@@ -17,7 +17,9 @@ if (fs.existsSync(dllCssPath)) {
 }
 
 module.exports = function () {
-  return webpackMerge(commonConfig(true), {
+  const execCommonConfig = commonConfig(true);
+
+  return webpackMerge(execCommonConfig, {
     cache: false,
     devtool: 'inline-source-map',
     devServer: {
@@ -36,7 +38,7 @@ module.exports = function () {
       watchOptions: {
         poll: true
       },
-      publicPath: commonConfig().output.publicPath.split('..')[1],
+      publicPath: execCommonConfig.output.publicPath.split('..')[1],
       compress: true, // Enable gzip compression for everything served:
       watchContentBase: false,
       // contentBase: [path.join(__dirname, '../views'), path.join(__dirname, '../.dll')],

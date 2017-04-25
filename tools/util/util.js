@@ -24,20 +24,27 @@ module.exports = {
 
     return name;
   },
-  htmls() {
+  htmls(isDev) {
     const plugins = [];
 
     entrys.forEach(v => {
 
       const htmlName = this.getName(v.html);
       const jsName = this.getName(v.js);
+      const chunks = [jsName];
+
+      if (isDev !== true) {
+        chunks.push('vendor');
+      }
+
+      console.log(isDev, chunks);
 
       plugins.push(new HtmlWebpackPlugin({
         title: htmlName,
         minify: false,
         filename: v.html,
         template: v.html,
-        chunks: [jsName, 'vendor'],
+        chunks,
         inject: 'body', // true | 'head' | 'body' | false
       }));
 

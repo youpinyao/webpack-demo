@@ -10,9 +10,9 @@ const modules = require('../util/modules.js');
 const util = require('../util/util.js');
 const config = require('../config/config.js');
 
-const pluginHtmls = util.htmls();
-
 function getPlugins(isDev) {
+  const pluginHtmls = util.htmls(isDev);
+
   let plugins = [
     new webpack.ProvidePlugin({
       _: 'underscore'
