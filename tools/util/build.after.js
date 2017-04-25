@@ -34,7 +34,9 @@ module.exports = function () {
         throw err;
       }
 
-      const $ = cheerio.load(data);
+      const $ = cheerio.load(data, {
+        decodeEntities: false
+      });
 
       $('link, script, img, video, audio').each(function () {
         if ($(this).attr('src')) {
