@@ -37,8 +37,6 @@ module.exports = {
         chunks.push('vendor');
       }
 
-      console.log(isDev, chunks);
-
       plugins.push(new HtmlWebpackPlugin({
         title: htmlName,
         minify: false,
