@@ -38,25 +38,21 @@ module.exports = function () {
         decodeEntities: false
       });
 
+      const replaceAttrs = ['href', 'src'];
+
       $('link, script, img, video, audio').each(function () {
-        if ($(this).attr('src')) {
-          const src = $(this).attr('src');
-          const srcc = src.replace(/\.\.\//g, './');
+        replaceAttrs.forEach(d => {
+          const attr = $(this).attr(d);
 
-          $(this).attr('src', srcc);
+          if (attr && !/base64/g.test(attr)) {
+            const nAttr = attr.replace(/\.\.\//g, './');
 
-          console.log(src, srcc);
-          console.log('----------');
-        }
-        if ($(this).attr('href')) {
-          const href = $(this).attr('href');
-          const hrefc = href.replace(/\.\.\//g, './');
+            $(this).attr(d, nAttr);
 
-          $(this).attr('href', hrefc);
-
-          console.log(href, ' to ', hrefc);
-          console.log('----------');
-        }
+            console.log(attr, 'to', nAttr);
+            console.log('----------');
+          }
+        });
       });
 
       fs.writeFile(filePath, $.html(), {
