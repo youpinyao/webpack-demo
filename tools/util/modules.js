@@ -41,7 +41,7 @@ module.exports = function (isDev) {
               ];
             }
           }
-        }, 'sass-loader', 'resolve-url-loader']
+        }, 'resolve-url-loader', 'sass-loader']
       })
     }, {
       test: /\.js$/,
