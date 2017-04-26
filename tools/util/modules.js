@@ -10,7 +10,7 @@ module.exports = function (isDev) {
         options: {
           interpolate: true,
           ignoreCustomFragments: [/\{\{.*?}}/],
-          attrs: ['img:src', 'link:href', 'audio:src', 'video:src', 'script:src'],
+          attrs: ['img:src', 'link:href', 'audio:src', 'video:src', 'script:src', 'div:data-src'],
           minimize: false
         }
       }]
@@ -45,7 +45,7 @@ module.exports = function (isDev) {
       })
     }, {
       test: /\.js$/,
-      exclude: /(node_modules)/,
+      exclude: isDev ? /(node_modules)/ : /(asdfsdfghjkldfghjk)/,
       use: [{
         loader: 'babel-loader',
         options: {
@@ -54,7 +54,10 @@ module.exports = function (isDev) {
             ['es2015', 'stage-0']
           ],
           plugins: [
-            'syntax-dynamic-import',
+            'syntax-dynamic-import', ['transform-es2015-classes', {
+              loose: true
+            }],
+            'transform-es2015-object-super',
             'transform-es3-property-literals',
             'transform-es3-member-expression-literals'
           ]

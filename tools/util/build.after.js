@@ -38,9 +38,9 @@ module.exports = function () {
         decodeEntities: false
       });
 
-      const replaceAttrs = ['href', 'src'];
+      const replaceAttrs = ['href', 'src', 'data-src'];
 
-      $('link, script, img, video, audio').each(function () {
+      $('link, script, img, video, audio, div[data-src]').each(function () {
         replaceAttrs.forEach(d => {
           const attr = $(this).attr(d);
 
