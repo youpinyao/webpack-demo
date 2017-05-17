@@ -1,7 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const modules = require('../util/modules.js');
+const modules = require('./module.config.js');
 
 const plugins = [
   // 输出 css
@@ -26,7 +26,7 @@ const plugins = [
 module.exports = function () {
   return {
     entry: {
-      vendor: ['./js/vendor.js']
+      vendor: [path.join(__dirname, '../../js/vendor.js')]
     },
     output: {
       path: path.join(__dirname, '../../.dll'),
