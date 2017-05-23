@@ -18,7 +18,10 @@ module.exports = {
 
     if (fs.existsSync(venderPath)) {
       version = JSON.parse(fs.readFileSync(venderPath, options));
+    } else {
+      fs.mkdirSync('.dll');
     }
+
     const file = fs.readFileSync(filePath, options);
     const fileHash = md5(file);
 
