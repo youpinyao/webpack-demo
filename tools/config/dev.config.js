@@ -9,8 +9,8 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const commonConfig = require('./base.config.js');
 const config = require('../config/config.js');
 
-const dllCssPath = './.dll/vendor.dll.css';
-const assets = ['./.dll/vendor.dll.js'];
+const dllCssPath = '.dll/vendor.dll.css';
+const assets = ['.dll/vendor.dll.js'];
 
 if (fs.existsSync(dllCssPath)) {
   assets.push(dllCssPath);
