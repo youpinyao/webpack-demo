@@ -35,8 +35,8 @@ function getPlugins(isDev) {
 }
 
 module.exports = function (isDev) {
-
   return {
+    cache: true,
     entry: util.entrys(isDev),
     output: {
       filename: 'js/[name].[hash].js',
