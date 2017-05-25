@@ -60,6 +60,7 @@ default:
 function runDev() {
   webpackConfig = webpackConfig();
   const compiler = webpack(webpackConfig);
+  let cDate = +new Date();
 
   // compiler.outputFileSystem = fs;
 
@@ -67,6 +68,7 @@ function runDev() {
 
   compiler.plugin('invalid', function () {
     clearConsole();
+    cDate = +new Date();
     console.log(chalk.green('Compiling'));
   });
 
@@ -74,7 +76,9 @@ function runDev() {
   // Whether or not you have warnings or errors, you will get this event.
   compiler.plugin('done', function (stats) {
     clearConsole();
-    console.log(chalk.green('Compiled'));
+    const ncDate = +new Date();
+
+    console.log(chalk.green(`Compiled ${ncDate - cDate}ms`));
   });
 
   const devServer = new WebpackDevServer(compiler, webpackConfig.devServer);
