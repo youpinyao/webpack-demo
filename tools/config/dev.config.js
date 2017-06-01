@@ -34,6 +34,7 @@ module.exports = function () {
       stats: 'errors-only',
       inline: true,
       https: false,
+      // https: true,
       watchOptions: {
         poll: true
       },

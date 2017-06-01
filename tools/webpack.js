@@ -37,20 +37,21 @@ case 'build':
   break;
 case 'dev':
   {
-    const dllHasChange = util.compareDll(configs.dll().entry.vendor[0], configs.dll().output.path);
+    // const dllHasChange = util.compareDll(configs.dll().entry.vendor[0], configs.dll().output.path);
 
-    if (dllHasChange) {
-      const dllCompiler = webpack(configs.dll());
+    // if (dllHasChange) {
+    util.delDll();
+    const dllCompiler = webpack(configs.dll());
 
-      dllCompiler.run((err, stats) => {
-        if (runCallback(err, stats)) {
-          console.log(chalk.green('\r\nbuild dll complete \r\n'));
-          runDev();
-        }
-      });
-    } else {
-      runDev();
-    }
+    dllCompiler.run((err, stats) => {
+      if (runCallback(err, stats)) {
+        console.log(chalk.green('\r\nbuild dll complete \r\n'));
+        runDev();
+      }
+    });
+    // } else {
+    //   runDev();
+    // }
 
   }
   break;
