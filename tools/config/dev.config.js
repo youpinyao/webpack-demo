@@ -4,7 +4,8 @@ const webpackMerge = require('webpack-merge');
 const webpack = require('webpack');
 const path = require('path');
 const fs = require('fs');
-const HtmlWebpackIncludeAssetsPlugin = require('html-webpack-include-assets-plugin');
+const HtmlWebpackIncludeAssetsPlugin = require(
+  'html-webpack-include-assets-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const commonConfig = require('./base.config.js');
 const config = require('../config/config.js');
@@ -44,6 +45,7 @@ module.exports = function () {
       // contentBase: [path.join(__dirname, '../views'), path.join(__dirname, '../.dll')],
     },
     plugins: [
+      new webpack.HotModuleReplacementPlugin(),
       new HtmlWebpackIncludeAssetsPlugin({
         assets,
         append: false,
