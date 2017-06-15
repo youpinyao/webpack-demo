@@ -27,7 +27,9 @@
     "no-multiple-empty-lines": ["error", {
       "max": 2
     }],
-    "indent": ["error", 2],
+    "indent": ["error", 2, {
+      "SwitchCase": 1
+    }],
     "comma-dangle": ["error", "only-multiline"],
     "object-shorthand": ["error", "always"],
     "no-use-before-define": ["error", { "functions": false, "classes": true }],
@@ -37,11 +39,14 @@
     "import/no-unresolved": 0,
     "import/no-extraneous-dependencies": 0,
     "lines-around-comment": 0,
-    "no-unused-vars": 2,
     "import/no-dynamic-require": 0,
     "require-jsdoc": 0,
     "no-invalid-this": 0,
     "no-unused-vars": 0,
-    "prefer-arrow-callback": 0
+    "prefer-arrow-callback": 0,
+    "callback-return": 0,
+    "no-underscore-dangle": 0,
+    "no-eval": 0,
+    "default-case": 0
   }
 }
