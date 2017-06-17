@@ -88,9 +88,8 @@ module.exports = {
 
       if (isDev) {
         entry[jsName] = entry[jsName].concat([
-          'webpack/hot/dev-server',
           `webpack-dev-server/client?http://${config.host}:${config.port}/`,
-
+          'webpack/hot/dev-server',
         ]);
       }
 
