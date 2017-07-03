@@ -25,7 +25,7 @@ function getPlugins(isDev) {
     new webpack.NamedModulesPlugin(),
 
     // 输出 css
-    new ExtractTextPlugin('css/[name].[hash].css'),
+    new ExtractTextPlugin('css/[name].[contenthash].css'),
   ];
 
   plugins = plugins.concat(pluginHtmls);
@@ -38,10 +38,10 @@ module.exports = function (isDev) {
     cache: true,
     entry: util.entrys(isDev),
     output: {
-      filename: 'js/[name].[hash].js',
+      filename: 'js/[name].[chunkhash].js',
       publicPath: config.publicPath,
       path: path.resolve(__dirname, config.path),
-      sourceMapFilename: '[name].[hash].map'
+      sourceMapFilename: '[name].[chunkhash].map'
     },
     resolve: {
       extensions: ['.ts', '.js', '.json'],
