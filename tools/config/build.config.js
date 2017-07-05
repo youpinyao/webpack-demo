@@ -2,12 +2,18 @@ const webpack = require('webpack');
 const webpackMerge = require('webpack-merge');
 const commonConfig = require('./base.config.js');
 
+const PrepackWebpackPlugin = require('prepack-webpack-plugin').default;
+const ClosureCompilerPlugin = require('webpack-closure-compiler');
+
 module.exports = function() {
   return webpackMerge(commonConfig(), {
-     entry: {
+    entry: {
       // vendor: path.join(__dirname, '../../js/vendor.js')
     },
     plugins: [
+      // new PrepackWebpackPlugin({
+
+      // }),
       new webpack.LoaderOptionsPlugin({
         minimize: false,
         debug: false
@@ -27,6 +33,15 @@ module.exports = function() {
           NODE_ENV: JSON.stringify('production')
         }
       }),
+
+      // new ClosureCompilerPlugin({
+      //   compiler: {
+      //     language_in: 'ECMASCRIPT6',
+      //     language_out: 'ECMASCRIPT5',
+      //     compilation_level: 'ADVANCED'
+      //   },
+      //   concurrency: 3,
+      // }),
 
       new webpack.optimize.UglifyJsPlugin({
         sourceMap: false,

@@ -23,6 +23,7 @@ module.exports = function () {
   return webpackMerge(execCommonConfig, {
     devtool: 'inline-source-map',
     devServer: {
+      disableHostCheck: true,
       port: config.port,
       host: config.host,
       hot: true,
