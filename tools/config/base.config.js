@@ -38,10 +38,10 @@ module.exports = function (isDev) {
     cache: true,
     entry: util.entrys(isDev),
     output: {
-      filename: 'js/[name].[chunkhash].js',
+      filename: 'js/[name].[hash].js',
       publicPath: config.publicPath,
       path: path.resolve(__dirname, config.path),
-      sourceMapFilename: '[name].[chunkhash].map'
+      sourceMapFilename: '[name].[hash].map'
     },
     resolve: {
       extensions: ['.ts', '.js', '.json'],
