@@ -33,15 +33,17 @@ function getPlugins(isDev) {
   return plugins;
 }
 
-module.exports = function (isDev) {
+module.exports = function(isDev) {
+  const hash = isDev ? 'hash' : 'chunkhash';
+
   return {
     cache: true,
     entry: util.entrys(isDev),
     output: {
-      filename: 'js/[name].[hash].js',
+      filename: `js/[name].[${hash}].js`,
       publicPath: config.publicPath,
       path: path.resolve(__dirname, config.path),
-      sourceMapFilename: '[name].[hash].map'
+      sourceMapFilename: `[name].[${hash}].map`
     },
     resolve: {
       extensions: ['.ts', '.js', '.json'],
